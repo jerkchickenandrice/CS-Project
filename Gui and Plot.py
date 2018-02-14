@@ -5,7 +5,8 @@ import numpy as np
 import math
 import tkinter
 from tkinter import *
-  
+number_planet = 1
+
 class Simulator(Frame):
 
     def __init__(self,interface):
@@ -18,6 +19,7 @@ class Simulator(Frame):
         interface.resizable(width=False, height=False)
         self.grid()
         self.create_widgets()
+        
         
     def create_widgets(self):
 
@@ -33,66 +35,83 @@ class Simulator(Frame):
         Radiobutton(self, text="3", variable=self.num_planet, value=3, command = self.option_planet).grid(row=2, column = 4)
         
         #-------------Velocity In X-----------------
-        
-        vel_label=Label(self, text = 'Velocity X Planet 1')
+            
+        vel_label=Label(self, text = 'Velocity X Green Planet')
         vel_label.grid(row=4,column=1)
         velocityX_1 = Scale(self, from_=-42, to=42, orient = HORIZONTAL , command = self.vel_x_1)
         velocityX_1.grid(row=4, column=2)
 
-        vel_label=Label(self, text = ' Velocity X Planet 2 ')
-        vel_label.grid(row=4,column=3)
-        velocityX_2 = Scale(self, from_=-42, to=42, orient = HORIZONTAL, command = self.vel_x_2)
-        velocityX_2.grid(row=4, column=4)
-
-        vel_label=Label(self, text = ' Velocity X Planet 3 ')
-        vel_label.grid(row=4,column=5)
-        velocityX_3 = Scale(self, from_=-42, to=42, orient = HORIZONTAL, command = self.vel_x_3)
-        velocityX_3.grid(row=4, column=6)
+        if number_planet == 2 or number_planet == 3:
+            
+            vel_label=Label(self, text = ' Velocity X Purple Planet')
+            vel_label.grid(row=4,column=3)
+            velocityX_2 = Scale(self, from_=-42, to=42, orient = HORIZONTAL, command = self.vel_x_2)
+            velocityX_2.grid(row=4, column=4)
+            
+        if number_planet == 3 :
+            
+            vel_label=Label(self, text = ' Velocity X Red Planet')
+            vel_label.grid(row=4,column=5)
+            velocityX_3 = Scale(self, from_=-42, to=42, orient = HORIZONTAL, command = self.vel_x_3)
+            velocityX_3.grid(row=4, column=6)
+            
         #-------------Velocity In Y-----------------
-        vel_label=Label(self, text = 'Velocity Y Planet 1')
+        vel_label=Label(self, text = 'Velocity Y Green Planet')
         vel_label.grid(row=5,column=1)
         velocityY_1 = Scale(self, from_=-42, to=42, orient = HORIZONTAL,command = self.vel_y_1)
         velocityY_1.grid(row=5, column=2)
-
-        vel_label=Label(self, text = ' Velocity Y Planet 2 ')
-        vel_label.grid(row=5,column=3)
-        velocityY_2 = Scale(self, from_=-42, to=42, orient = HORIZONTAL, command = self.vel_y_2)
-        velocityY_2.grid(row=5, column=4)
-
-        vel_label=Label(self, text = ' Velocity Y Planet 3 ')
-        vel_label.grid(row=5,column=5)
-        velocityY_3 = Scale(self, from_=-42, to=42, orient = HORIZONTAL, command = self.vel_y_3)
-        velocityY_3.grid(row=5, column=6)
+        
+        if number_planet == 2 or number_planet == 3:
+            
+            vel_label=Label(self, text = ' Velocity Y Purple Planet')
+            vel_label.grid(row=5,column=3)
+            velocityY_2 = Scale(self, from_=-42, to=42, orient = HORIZONTAL, command = self.vel_y_2)
+            velocityY_2.grid(row=5, column=4)
+            
+        if number_planet == 3 :
+            
+            vel_label=Label(self, text = ' Velocity Y Red Planet')
+            vel_label.grid(row=5,column=5)
+            velocityY_3 = Scale(self, from_=-42, to=42, orient = HORIZONTAL, command = self.vel_y_3)
+            velocityY_3.grid(row=5, column=6)
         #-------------Position------------------
-        pos_label=Label(self, text = 'Position Planet 1')
+        pos_label=Label(self, text = 'Position Green Planet')
         pos_label.grid(row=6, column=1)
         position_1 = Scale(self, from_=-25, to=25, orient=HORIZONTAL, command = self.position_1)
         position_1.grid(row=6,column=2)
 
-        pos_label=Label(self, text = ' Position Planet 2 ')
-        pos_label.grid(row=6, column=3)
-        position_2 = Scale(self, from_=-25, to=25, orient=HORIZONTAL, command = self.position_2)
-        position_2.grid(row=6,column=4)
-
-        pos_label=Label(self, text = ' Position Planet 3 ')
-        pos_label.grid(row=6, column=5)
-        position_3 = Scale(self, from_=-25, to=25, orient=HORIZONTAL, command = self.position_3)
-        position_3.grid(row=6,column=6)
+        if number_planet == 2 or number_planet == 3:
+        
+            pos_label=Label(self, text = ' Position Purple Planet')
+            pos_label.grid(row=6, column=3)
+            position_2 = Scale(self, from_=-25, to=25, orient=HORIZONTAL, command = self.position_2)
+            position_2.grid(row=6,column=4)
+            
+        if number_planet == 3 :
+            
+            pos_label=Label(self, text = ' Position Red Planet')
+            pos_label.grid(row=6, column=5)
+            position_3 = Scale(self, from_=-25, to=25, orient=HORIZONTAL, command = self.position_3)
+            position_3.grid(row=6,column=6)
         #-------------Mass--------------------
-        mass_label=Label(self, text = 'Mass Planet 1')
+        mass_label=Label(self, text = 'Mass Green Planet')
         mass_label.grid(row=7,column=1)
-        mass_1 = Scale(self, from_=0, to=10, orient=HORIZONTAL, command = self.mass_1)
+        mass_1 = Scale(self, from_=0, to=150, orient=HORIZONTAL, command = self.mass_1)
         mass_1.grid(row=7, column=2)
 
-        mass_label=Label(self, text = ' Mass Planet 2 ')
-        mass_label.grid(row=7,column=3)
-        mass_2 = Scale(self, from_=0, to=10, orient=HORIZONTAL,command = self.mass_1)
-        mass_2.grid(row=7, column=4)
-
-        mass_label=Label(self, text = ' Mass Planet 3 ')
-        mass_label.grid(row=7,column=5)
-        mass_3 = Scale(self, from_=0, to=10, orient=HORIZONTAL, command = self.mass_1)
-        mass_3.grid(row=7, column=6)
+        if number_planet == 2 or number_planet == 3:
+        
+            mass_label=Label(self, text = ' Mass of Purple Planet')
+            mass_label.grid(row=7,column=3)
+            mass_2 = Scale(self, from_=0, to=150, orient=HORIZONTAL,command = self.mass_1)
+            mass_2.grid(row=7, column=4)
+        
+        if number_planet == 3 :
+            
+            mass_label=Label(self, text = ' Mass of Red Planet')
+            mass_label.grid(row=7,column=5)
+            mass_3 = Scale(self, from_=0, to=150, orient=HORIZONTAL, command = self.mass_1)
+            mass_3.grid(row=7, column=6)
 
        # self.planet_one = BooleanVar()
         #Checkbutton(self,text="1", variable = self.planet_one, command = self.num_planets).grid(row=1,column=8,columnspan=1)
@@ -106,14 +125,17 @@ class Simulator(Frame):
         
         
     def option_planet(self):
-
+    
+            global number_planet
+            
             if self.num_planet.get() == 1 :
                 number_planet = 1
             if self.num_planet.get() == 2 :
                 number_planet = 2
             if self.num_planet.get() == 3 :
                 number_planet = 3
-
+            self.create_widgets()
+            
                 
     def vel_x_1(self,tempval):
         global vel_x_1
@@ -129,15 +151,15 @@ class Simulator(Frame):
     
     def vel_y_1(self,tempval):
         global vel_y_1
-        vel_y_1 = int(tempval)
+        vel_y_1 = int(tempval)/100
         
     def vel_y_2(self,tempval):
         global vel_y_2
-        vel_y_2 = int(tempval)
+        vel_y_2 = int(tempval)/100
     
     def vel_y_3(self,tempval):
         global vel_y_3
-        vel_y_3 = int(tempval)
+        vel_y_3 = int(tempval)/100
         
     def position_1(self,tempval):
         global position_1
@@ -187,13 +209,13 @@ class Simulator(Frame):
 
 
 def animate(i):
-
+    global number_planet
+    global count
     def planet_1():
         global distance
         global vel_y_1
         global vel_x_1
         global G
-        global count
         
         distance = (x_pos_1[count])**2 +(y_pos_1[count])**2
         sqrt = distance**(0.5)
@@ -220,8 +242,8 @@ def animate(i):
         
         
         ax1.clear()
-        ax1.scatter(x_pos_1,y_pos_1)
-        ax2.scatter(0, 0)
+        ax1.scatter(x_pos_1,y_pos_1, s = 0.5, color = 'C0')
+        ax2.scatter(0, 0, color ='C1')
         ax1.get_xaxis().get_major_formatter().set_scientific(False) # Turns off sceintific saling to have whole numbers only
         #print(x_pos,y_pos)
 
@@ -230,7 +252,6 @@ def animate(i):
         global vel_y_2
         global vel_x_2
         global G
-        global count
         
         distance = (x_pos_2[count])**2 +(y_pos_2[count])**2
         sqrt = distance**(0.5)
@@ -256,8 +277,8 @@ def animate(i):
         vel_y_2 += Acc_y
         
         
-        ax1.scatter(x_pos_2,y_pos_2)
-        ax2.scatter(0, 0)
+        ax1.scatter(x_pos_2,y_pos_2, s=0.5, color= 'C2')
+        ax2.scatter(0, 0, color = 'C1')
         ax1.get_xaxis().get_major_formatter().set_scientific(False) # Turns off sceintific saling to have whole numbers only
         #print(x_pos,y_pos)
 
@@ -267,7 +288,6 @@ def animate(i):
         global vel_y_3
         global vel_x_3
         global G
-        global count
         
         distance = (x_pos_3[count])**2 +(y_pos_3[count])**2
         sqrt = distance**(0.5)
@@ -291,27 +311,27 @@ def animate(i):
     
         vel_x_3 += Acc_x
         vel_y_3 += Acc_y
-        
-        count = count + 1
 
-        ax1.scatter(x_pos_3,y_pos_3)
-        ax2.scatter(0, 0)
+        ax1.scatter(x_pos_3,y_pos_3, s=0.5, color = 'C3')
+        ax2.scatter(0, 0, color ='C1')
         ax1.get_xaxis().get_major_formatter().set_scientific(False)
-        ax1.set_xlim([-25,25])
-        ax1.set_ylim([-25,25])
+        
+        
     planet_1()
-    planet_2()
-    planet_3()                         
+    if number_planet == 2 or number_planet ==3:
+        planet_2()
+    if number_planet == 3:
+        planet_3()                         
+    count = count + 1
+    ax1.set_xlim([-25,25])
+    ax1.set_ylim([-25,25])
 
-              
+    
 interface = tkinter.Tk()
 GUI = Simulator(interface)
 Frame2 = Simulator
-
+   
 #Variables and Lists
-
-interface.mainloop
-
 
 style.use('dark_background')
 fig = plt.figure()
@@ -343,9 +363,11 @@ G = 0.00000005
 
 m_sun = 2250000
 timestep = 1
+
+
 ax1 = fig.add_subplot(1,1,1)
 ax2 = fig.add_subplot(1,1,1)
 
-           
+interface.mainloop        
         
    
